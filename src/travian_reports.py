@@ -17,6 +17,7 @@ import os
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Font
 import mysql.connector
+import re
 
 name = "ReportsLogger"
 logger = logging.getLogger(name)
@@ -286,7 +287,7 @@ def read_reports(driver):
         a_tag_report = td_new_message.find_element(By.XPATH, './/div[@class=""]/a')
 
         # extract the names of the villages
-        villages = a_tag_report.text.split(" пљачка ")
+        villages = re.split(' пљачка | напада ', a_tag_report.text)
         my_village = villages[0]
         farm_village = villages[1]
 
