@@ -278,7 +278,7 @@ def read_reports(driver):
 
     # iterate through each report reversed
     for tr in reversed(tr_elements):
-        scroll_time = random.uniform(0.1, 0.12) * 1000
+        scroll_time = random.uniform(0.05, 0.08) * 1000
         scroll_offset = random.randint(200, 210)
         # scroll to the next report
         scroll_to(driver, tr, scroll_time, scroll_offset)
@@ -318,7 +318,7 @@ def read_reports(driver):
 
         # find and check the checkbox
         td_checkbox = tr.find_element(By.XPATH, './/td[contains(@class, "sel")]/input')
-        pause(scroll_time, 0.01, 0.03)
+        pause(scroll_time, 0.005, 0.015)
         td_checkbox.click()
 
         # fill the Excel data for the first sheet/table
@@ -335,7 +335,7 @@ def read_reports(driver):
         data = (my_village, farm_village, attack_date, farmed_amount, farmed_capacity, type_attack)
         insert_data_into_table(cursor, data)
 
-        sleep(random.uniform(0.1, 0.12))
+        sleep(random.uniform(0.05, 0.07))
 
     # find the button to mark the reports as read
     button_wrapper = driver.find_element(By.XPATH, '//div[contains(@class, "buttonWrapper")]')
@@ -343,7 +343,7 @@ def read_reports(driver):
     scroll_offset = random.randint(180, 190)
     # scroll to the button
     scroll_to(driver, button_wrapper, scroll_time, scroll_offset)
-    pause(scroll_time, 0.23, 0.30)
+    pause(scroll_time, 0.17, 0.24)
     # click the button
     first_button = button_wrapper.find_element(By.XPATH, './/button')
     first_button.click()
@@ -410,7 +410,7 @@ def read_reports(driver):
     driver.get('https://google.com')
     log("Script executed!")
     send_telegram_message(f"Reports have been successfully read and forwarded ({len(tr_elements)})")
-    sleep(random.uniform(680, 940))
+    sleep(random.uniform(420, 540))
 
 
 # Setup driver
